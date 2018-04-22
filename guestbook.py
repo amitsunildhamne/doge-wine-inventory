@@ -199,11 +199,7 @@ class MainPage(webapp2.RequestHandler):
 class Guestbook(webapp2.RequestHandler):
 
     def post(self):
-        # We set the same parent key on the 'Greeting' to ensure each
-        # Greeting is in the same entity group. Queries across the
-        # single entity group will be consistent. However, the write
-        # rate to a single entity group should be limited to
-        # ~1/second.
+       
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
         errq=""
@@ -226,18 +222,13 @@ class Guestbook(webapp2.RequestHandler):
             self.redirect('/enter?' + urllib.urlencode(query_params))
             return
 
-        
-
-        
-       
-        
-           
 
         query_params = {'wine_type': wine_type,'error1':errq}
         self.redirect('/enter?' + urllib.urlencode(query_params))
 # [END guestbook]
 
 class Display(webapp2.RequestHandler):
+    #display diff wines
      def get(self):
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
@@ -286,6 +277,7 @@ class Display(webapp2.RequestHandler):
 
 
 class MO(webapp2.RequestHandler):
+    #view index page with options
     def get (self):
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
@@ -314,6 +306,7 @@ class MO(webapp2.RequestHandler):
 
 
 class Search2(webapp2.RequestHandler):
+
      def get(self):
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
@@ -395,6 +388,7 @@ class Search2(webapp2.RequestHandler):
 
 
 class Search(webapp2.RequestHandler):
+
      def get(self):
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
@@ -446,15 +440,8 @@ class Search(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('search.html')
         self.response.write(template.render(template_values))
 
-
-class Seek(webapp2.RequestHandler):
-
-    def post(self):
-        # We set the same parent key on the 'Greeting' to ensure each
-        # Greeting is in the same entity group. Queries across the
-        # single entity group will be consistent. However, the write
-        # rate to a single entity group should be limited to
-        # ~1/second.
+     def post(self):
+       
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
         if(wine_type !=""):
@@ -474,7 +461,12 @@ class Seek(webapp2.RequestHandler):
         query_params = {'wine_type': wine_type}
         self.redirect('/search2?' + urllib.urlencode(query_params))
 
+
+
 class Cart(webapp2.RequestHandler):
+
+    #to go to cart
+
     def get(self):
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
@@ -532,12 +524,10 @@ class Cart(webapp2.RequestHandler):
 
 class Add(webapp2.RequestHandler):
 
+    
+
     def post(self):
-        # We set the same parent key on the 'Greeting' to ensure each
-        # Greeting is in the same entity group. Queries across the
-        # single entity group will be consistent. However, the write
-        # rate to a single entity group should be limited to
-        # ~1/second.
+        
         
         user = users.get_current_user().email()
         wine_type = self.request.get('wine_type',
@@ -589,12 +579,9 @@ class Add(webapp2.RequestHandler):
 
 class DelCart(webapp2.RequestHandler):
 
+    # to delete from cart
     def post(self):
-        # We set the same parent key on the 'Greeting' to ensure each
-        # Greeting is in the same entity group. Queries across the
-        # single entity group will be consistent. However, the write
-        # rate to a single entity group should be limited to
-        # ~1/second.
+       
         user = users.get_current_user().email()
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
@@ -605,7 +592,6 @@ class DelCart(webapp2.RequestHandler):
             ancestor=user_key(user)).order(-Greeting.date)
         greetings1 = greetings_query.fetch()
 
-        #find a match. get it's key and delete
         
         for ans in greetings1:
 
@@ -631,12 +617,9 @@ class DelCart(webapp2.RequestHandler):
 
 class Chcart(webapp2.RequestHandler):
 
+    # to add changes to cart
     def post(self):
-        # We set the same parent key on the 'Greeting' to ensure each
-        # Greeting is in the same entity group. Queries across the
-        # single entity group will be consistent. However, the write
-        # rate to a single entity group should be limited to
-        # ~1/second.
+       
         user = users.get_current_user().email()
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
@@ -658,7 +641,7 @@ class Chcart(webapp2.RequestHandler):
             ancestor=user_key(user)).order(-Greeting.date)
         greetings1 = greetings_query.fetch()
 
-        #find a match. get it's key and delete
+        
         
         for ans in greetings1:
 
@@ -686,12 +669,10 @@ class Chcart(webapp2.RequestHandler):
 
 class Purchase(webapp2.RequestHandler):
 
+    #to complete purchase
+
     def get(self):
-        # We set the same parent key on the 'Greeting' to ensure each
-        # Greeting is in the same entity group. Queries across the
-        # single entity group will be consistent. However, the write
-        # rate to a single entity group should be limited to
-        # ~1/second.
+      
        
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
@@ -749,21 +730,12 @@ class Purchase(webapp2.RequestHandler):
            
         }
 
-        #find a match. get it's key and delete
-        
-            
-
-
-
-        
-
-
-             
-
+      
         template = JINJA_ENVIRONMENT.get_template('thankyou.html')
         self.response.write(template.render(template_values))
 
-class Pur(webapp2.RequestHandler):
+class previousPur(webapp2.RequestHandler):
+    #view previous purchases
      def get(self):
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
@@ -813,12 +785,7 @@ class Pur(webapp2.RequestHandler):
 class AddS(webapp2.RequestHandler):
 
     def post(self):
-        # We set the same parent key on the 'Greeting' to ensure each
-        # Greeting is in the same entity group. Queries across the
-        # single entity group will be consistent. However, the write
-        # rate to a single entity group should be limited to
-        # ~1/second.
-        
+       
         user = users.get_current_user().email()
         wine_type = self.request.get('wine_type',
                                           DEFAULT_WINE_TYPE)
@@ -880,13 +847,12 @@ app = webapp2.WSGIApplication([
     (r'/display',Display),
     (r'/search',Search),
     (r'/search2',Search2),
-    (r'/seek',Seek),
     (r'/cart',Cart),
     (r'/add',Add),
     (r'/cartdel',DelCart),
     (r'/cartchQ',Chcart),
     (r'/purchase',Purchase),
-    (r'/purchase2',Pur),
+    (r'/purchase2',previousPur),
     (r'/addfromS',AddS)
 ], debug=True)
 # [END app]
