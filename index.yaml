@@ -1,0 +1,24 @@
+indexes:
+- kind: Greeting
+  ancestor: yes
+  properties:
+  - name: date
+    direction: desc
+
+- kind: Query
+  ancestor: yes
+  properties:
+  - name: date
+    direction: desc
+
+- kind: UserWine
+  ancestor: yes
+  properties:
+  - name: date
+    direction: desc
+
+- kind:  afterPurchase
+  ancestor: yes
+  properties:
+  - name: date
+    direction: desc

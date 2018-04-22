@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <!-- [START css] -->
+  <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
+  
+    <!-- [END css] -->
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+      blockquote {
+        margin-bottom: 10px;
+        border-left-color: #bbb;
+      }
+      form {
+        margin-top: 10px;
+      }
+      .form-signin input[type="text"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+      .row {
+        margin-left: 0px;
+        margin-top: 10px;
+        overflow: scroll;
+      }
+    </style>
+  </head>
+  <body>
+  <div>
+    <center>
+      <br>
+      <br>
+      
+      <br>
+    </center>
+    </div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Mekhala's Wine Inventory App</a>
+
+           {% if user and user.user_id()%}
+           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="nav-collapse collapse pull-right">
+            <a class="brand" href="#">user:{{user}}</a>
+            <a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>
+            <a href="/cart" class="btn">Cart</a>
+          </div>
+          
+           {% else %}
+          <div class="nav-collapse collapse pull-right">
+            <a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <hr>
+    <div class="container">
+      <!-- [START greetings] -->
+     
+      
+      <!-- [END greetings] -->
+      <div>
+      {% if user and user.user_id()%}
+      <li><a href="/cart"> <font size="+1" color="0000CC">Go to cart</font></a></li>
+       <li><a href="/purchase2"><font size="+1" color="0000CC">Previous Purchases</font></a></li>
+      {% else %}
+     
+     <blockquote><font size="+1" color="800000">Please Login to Access Cart</font></blockquote>
+     {% endif %}
+      <li><a href="/search"><font size="+1" color="0000CC">Search for wine</font></a></li>
+      <li><a href="/enter"><font size="+1" color="0000CC">Enter New Info</font></a></li>
+      <li><a href="/display?wine_type=red"> <font size="+1" color="0000CC">Browse red wines</font></a></li>
+      <li><a href="/display?wine_type=white"><font size="+1" color="0000CC">Browse white wines </font></a></li>
+      <li><a href="/display?wine_type=rose"><font size="+1" color="0000CC">Browse rose wines</font></a></li>
+      <li><a href="/display?wine_type=sparkling"><font size="+1" color="0000CC">Browse sparkling wines</font><font size="+1" color="0000CC"></a></li>
+      </div>
+     
+      
+  </body>
+</html>
+{% endautoescape %}

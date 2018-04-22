@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <!-- [START css] -->
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- [END css] -->
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+      blockquote {
+        margin-bottom: 10px;
+        border-left-color: #bbb;
+      }
+      form {
+        margin-top: 10px;
+      }
+      .form-signin input[type="text"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+      .row {
+        margin-left: 0px;
+        margin-top: 10px;
+        overflow: scroll;
+      }
+    </style>
+  </head>
+  <body>
+  <div>
+    <center>
+      <br>
+      <br>
+     
+      <br>
+    </center>
+    </div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" style="text-transform: capitalize;" href="#">Enter New Wine Info</a>
+
+           {% if user1 and user1.user_id()%}
+           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="nav-collapse collapse pull-right">
+            <a class="brand" href="#">user:{{user}}</a>
+            <a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>
+            <a href="/cart" class="btn">Cart</a>
+          </div>
+          
+           {% else %}
+          <div class="nav-collapse collapse pull-right">
+            <a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <hr>
+   
+
+    <script>
+   function check()
+    {
+        con=document.getElementById("country").value;
+        reg=document.getElementById("region").value;
+        vari=document.getElementById("variety").value;
+        yr=document.getElementById("year").value;
+        win=document.getElementById("winery").value;
+        winetype=document.getElementById("winetype").value;
+        pr=document.getElementById("price").value;
+        if((con=="") || (reg=="") || (vari=="") || (yr=="") || (win=="") || (winetype=="") || (pr==""))
+        {
+            
+            if((winetype=="") && ((con=="") || (reg=="") || (vari=="") || (yr=="") || (win=="") || (pr==""))){
+              document.getElementById("err1").innerHTML="Error: Category must not be blank"; 
+              document.getElementById("err").innerHTML="Error: All fields must be filled";
+            }
+            else if(winetype==""){
+              document.getElementById("err1").innerHTML="Error: Category must not be blank";
+              document.getElementById("err").innerHTML="";
+            }
+            else{
+              document.getElementById("err1").innerHTML=""; 
+              document.getElementById("err").innerHTML="Error: All fields must be filled";
+            }
+            return false;
+        }            
+    }
+
+    function checkCat()
+    {
+      wineT =document.getElementById("winetype").value;
+      if((wineT=="")){
+        document.getElementById("err1").innerHTML="Error: Category must not be blank";
+            
+            return false;
+      }
+    }
+    </script>
+
+
+    
+    
+    <div class="container">
+    
+
+    <br>
+    <br>
+
+      
+     
+      <!-- [END greetings] -->
+
+    
+
+      <form onSubmit="return check()" action="/sign?wine_type={{ wine_type }}" method="post">
+
+      <b><i><div id="err"></div></i></b>
+      <b>
+      <br>
+      <br>
+      <br>
+      
+        <div>
+          <label for="country">Country of Origin:
+          </label>
+          <input type="text"  id="country" name="country">
+          
+        </div>
+
+         <div>
+          <label for="region">Region:
+          </label>
+          <input type="text" id="region" name="region">
+
+        </div>  
+
+
+         <div>
+          <label for="variety">Variety:
+          </label>
+          <input type="text" id="variety" name="variety">
+        </div>  
+
+         <div>
+          <label for="winery">Winery Name:
+          </label>
+          <input type="text" id="winery" name="winery">
+        </div>  
+
+         <div>
+          <label for="year">Year:
+          </label>
+          <input type="text" id="year" name="year">
+        </div>  
+
+        <div>
+          <label for="price">Price($):
+          </label>
+          <input type="text" id="price" name="price">
+        </div>  
+       
+      
+      <input type="submit" class="btn btn-large btn-primary" value="Enter Wine Info"  />
+
+       
+     
+      </form>
+
+      <hr>
+
+      <form onSubmit="return checkCat()"  class=cat>Category:
+        <input id="winetype" type="text" value="{{ wine_type }}" name="wine_type">
+        <input type="submit" value="switch">
+      </form>
+      <b><i><div id="err1"></div></i></b>
+      <blockquote>{{error1}}</blockquote>
+      
+
+
+      <a href="/">Return to home</a>
+      
+    </div>
+    
+  </body>
+</html>
+{% endautoescape %}

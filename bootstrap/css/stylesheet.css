@@ -1,0 +1,21 @@
+body {
+	font: 13px Verdana, sans-serif;
+}
+h1 {
+	font: 21px Georgia, "Times New Roman", Times, serif;
+}
+h2 {
+	font: 18px Georgia, "Times New Roman", Times, serif;
+}
+
+.left {
+    width: 20%;
+    float: left;
+    margin-left: 7px;
+    
+}
+.right {
+    width: 45%;
+    margin-left: 7px;
+    float:left;
+}
